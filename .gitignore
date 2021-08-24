@@ -5,12 +5,14 @@
 
 # COMPOSER
 /vendor
+composer.lock
 
 # BUILD FILES
 /bower_components/*
 /node_modules/*
 /build/*
 /yarn-error.log
+/cpresources/*
 
 # MISC FILES
 .cache
@@ -30,3 +32,10 @@
 !.vscode/extensions.json
 config.codekit3
 prepros-6.config
+.ddev
+
+# Test Caching / Logging
+tests/_craft/config/project/*
+tests/_craft/storage/logs/*
+tests/_output/*
+tests/_support/_generated/*

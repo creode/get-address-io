@@ -27,12 +27,22 @@
     "require-dev": {
       "craftcms/cms": "^3.2.0",
       "codeception/codeception": "^3.0",
-      "vlucas/phpdotenv": "^3.0"
+      "vlucas/phpdotenv": "^3.0",
+      "marcocesarato/php-conventional-changelog": "^1.12"
     },
     "autoload": {
         "psr-4": {
           "jaymeh\\getaddressio\\": "src/"
         }
+    },
+    "scripts": {
+        "tests": "php vendor/bin/codecept run",
+        "tests-coverage": "php vendor/bin/codecept run --coverage-html coverage-report",
+        "changelog": "conventional-changelog",
+        "release": "conventional-changelog --commit",
+        "release:patch": "conventional-changelog --patch --commit",
+        "release:minor": "conventional-changelog --minor --commit",
+        "release:major": "conventional-changelog --major --commit"
     },
     "extra": {
         "name": "Get Address IO",
