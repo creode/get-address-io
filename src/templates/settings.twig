@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Get Address IO plugin for Craft CMS 3.x
+ *
+ * Get Address IO Settings.twig
+ *
+ * @author    Jamie Sykes <contact@jaymeh.co.uk>
+ * @copyright Copyright (c) 2021 Jamie Sykes <contact@jaymeh.co.uk>
+ * @link      https://jaymeh.co.uk
+ * @package   GetAddressIo
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("jaymeh\\getaddressio\\assetbundles\\getaddressio\\GetAddressIoAsset") %}
+
+{{ forms.textField({
+    label: 'Some Field',
+    instructions: 'Enter some setting here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: settings['someAttribute']})
+}}

@@ -1,0 +1,49 @@
+{
+    "name": "jaymeh/get-address-io",
+    "description": "Integrates Craft CMS with the getaddress IO service for autocompletion address' using UK Postcoes",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "get address io"
+    ],
+    "support": {
+        "docs": "https://github.com/jaymeh/get-address-io/blob/master/README.md",
+        "issues": "https://github.com/jaymeh/get-address-io/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jamie Sykes <contact@jaymeh.co.uk>",
+            "homepage": "https://jaymeh.co.uk"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "require-dev": {
+      "craftcms/cms": "^3.2.0",
+      "codeception/codeception": "^3.0",
+      "vlucas/phpdotenv": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "jaymeh\\getaddressio\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Get Address IO",
+        "handle": "get-address-io",
+        "developer": "Jamie Sykes &lt;contact@jaymeh.co.uk&gt;",
+        "developerUrl": "https://jaymeh.co.uk",
+        "documentationUrl": "https://github.com/jaymeh/get-address-io/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/jaymeh/get-address-io/master/CHANGELOG.md",
+        "components": {
+            "getAddressLookupService": "jaymeh\\getaddressio\\services\\GetAddressLookupService"
+        },
+        "class": "jaymeh\\getaddressio\\GetAddressIo"
+    }
+}
