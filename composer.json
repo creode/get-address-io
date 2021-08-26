@@ -1,5 +1,5 @@
 {
-    "name": "jaymeh/get-address-io",
+    "name": "creode/get-address-io",
     "description": "Integrates Craft CMS with the getaddress IO service for autocompletion address' using UK Postcoes",
     "type": "craft-plugin",
     "version": "1.0.0",
@@ -11,14 +11,14 @@
         "get address io"
     ],
     "support": {
-        "docs": "https://github.com/jaymeh/get-address-io/blob/master/README.md",
-        "issues": "https://github.com/jaymeh/get-address-io/issues"
+        "docs": "https://github.com/creode/get-address-io/blob/master/README.md",
+        "issues": "https://github.com/creode/get-address-io/issues"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Jamie Sykes <contact@jaymeh.co.uk>",
-            "homepage": "https://jaymeh.co.uk"
+            "name": "Creode <contact@creode.co.uk>",
+            "homepage": "https://creode.co.uk"
         }
     ],
     "require": {
@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-          "jaymeh\\getaddressio\\": "src/"
+          "creode\\getaddressio\\": "src/"
         }
     },
     "scripts": {
@@ -47,13 +47,13 @@
     "extra": {
         "name": "Get Address IO",
         "handle": "get-address-io",
-        "developer": "Jamie Sykes &lt;contact@jaymeh.co.uk&gt;",
-        "developerUrl": "https://jaymeh.co.uk",
-        "documentationUrl": "https://github.com/jaymeh/get-address-io/blob/master/README.md",
-        "changelogUrl": "https://raw.githubusercontent.com/jaymeh/get-address-io/master/CHANGELOG.md",
+        "developer": "Creode",
+        "developerUrl": "https://creode.co.uk",
+        "documentationUrl": "https://github.com/creode/get-address-io/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/creode/get-address-io/master/CHANGELOG.md",
         "components": {
-            "getAddressLookupService": "jaymeh\\getaddressio\\services\\GetAddressLookupService"
+            "getAddressLookupService": "creode\\getaddressio\\services\\GetAddressLookupService"
         },
-        "class": "jaymeh\\getaddressio\\GetAddressIo"
+        "class": "creode\\getaddressio\\GetAddressIo"
     }
 }

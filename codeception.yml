@@ -32,7 +32,7 @@ modules:
       migrations: []
       plugins:
         get-address-io:
-          class: '\jaymeh\getaddressio\GetAddressIo'
+          class: '\creode\getaddressio\GetAddressIo'
           handle: get-address-io
       cleanup: true
       transaction: true

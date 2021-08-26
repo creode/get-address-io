@@ -4,19 +4,19 @@
  *
  * Integrates Craft CMS with the getaddress IO service for autocompletion address' using UK Postcoes
  *
- * @link      https://jaymeh.co.uk
- * @copyright Copyright (c) 2021 Jamie Sykes <contact@jaymeh.co.uk>
+ * @link      https://creode.co.uk
+ * @copyright Copyright (c) 2021 Creode <contact@creode.co.uk>
  */
 
-namespace jaymeh\getaddressio\controllers;
+namespace creode\getaddressio\controllers;
 
-use jaymeh\getaddressio\GetAddressIo;
+use creode\getaddressio\GetAddressIo;
 
 use Craft;
 use craft\web\Controller;
 
 /**
- * @author    Jamie Sykes <contact@jaymeh.co.uk>
+ * @author    Creode <contact@creode.co.uk>
  * @package   GetAddressIo
  * @since     1.0.0
  */

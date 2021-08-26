@@ -4,14 +4,14 @@
  *
  * Integrates Craft CMS with the getaddress IO service for autocompletion address' using UK Postcoes
  *
- * @link      https://jaymeh.co.uk
- * @copyright Copyright (c) 2021 Jamie Sykes <contact@jaymeh.co.uk>
+ * @link      https://creode.co.uk
+ * @copyright Copyright (c) 2021 Creode <contact@creode.co.uk>
  */
 
-namespace jaymeh\getaddressio\widgets;
+namespace creode\getaddressio\widgets;
 
-use jaymeh\getaddressio\GetAddressIo;
-use jaymeh\getaddressio\assetbundles\addresslookupusagewidget\AddressLookupUsageWidgetAsset;
+use creode\getaddressio\GetAddressIo;
+use creode\getaddressio\assetbundles\addresslookupusagewidget\AddressLookupUsageWidgetAsset;
 
 use Craft;
 use craft\base\Widget;
@@ -19,7 +19,7 @@ use craft\base\Widget;
 /**
  * Get Address IO Widget
  *
- * @author    Jamie Sykes <contact@jaymeh.co.uk>
+ * @author    Creode <contact@creode.co.uk>
  * @package   GetAddressIo
  * @since     1.0.0
  */
@@ -50,7 +50,7 @@ class AddressLookupUsage extends Widget
      */
     public static function iconPath()
     {
-        return Craft::getAlias("@jaymeh/getaddressio/assetbundles/addresslookupusagewidget/dist/img/AddressLookupUsage-icon.svg");
+        return Craft::getAlias("@creode/getaddressio/assetbundles/addresslookupusagewidget/dist/img/AddressLookupUsage-icon.svg");
     }
 
     /**

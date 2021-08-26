@@ -1,6 +1,6 @@
 <?php
 
-namespace jaymeh\getaddressiotests\acceptance;
+namespace creode\getaddressiotests\acceptance;
 
 use Craft;
 use FunctionalTester;

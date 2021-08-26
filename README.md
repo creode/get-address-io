@@ -18,7 +18,7 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require jaymeh/get-address-io
+        composer require creode/get-address-io
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Get Address IO.
 
@@ -40,4 +40,4 @@ Some things to do, and ideas for potential features:
 
 * Release it
 
-Brought to you by [Jamie Sykes <contact@jaymeh.co.uk>](https://jaymeh.co.uk)
+Brought to you by [Creode <contact@creode.co.uk>](https://creode.co.uk)

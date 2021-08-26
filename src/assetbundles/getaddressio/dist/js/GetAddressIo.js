@@ -3,9 +3,9 @@
  *
  * Get Address IO JS
  *
- * @author    Jamie Sykes <contact@jaymeh.co.uk>
- * @copyright Copyright (c) 2021 Jamie Sykes <contact@jaymeh.co.uk>
- * @link      https://jaymeh.co.uk
+ * @author    Creode <contact@creode.co.uk>
+ * @copyright Copyright (c) 2021 Creode <contact@creode.co.uk>
+ * @link      https://creode.co.uk
  * @package   GetAddressIo
  * @since     1.0.0
  */
