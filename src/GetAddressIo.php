@@ -10,7 +10,7 @@
 
 namespace creode\getaddressio;
 
-use creode\getaddressio\services\GetAddressLookupService as GetAddressLookupServiceService;
+use creode\getaddressio\services\GetAddressLookupService;
 use creode\getaddressio\models\Settings;
 use creode\getaddressio\widgets\AddressLookupUsage as AddressLookupUsageWidget;
 
@@ -32,7 +32,7 @@ use yii\base\Event;
  * @package   GetAddressIo
  * @since     1.0.0
  *
- * @property  GetAddressLookupServiceService $getAddressLookupService
+ * @property  GetAddressLookupService $getAddressLookupService
  */
 class GetAddressIo extends Plugin
 {
