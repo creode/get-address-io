@@ -13,6 +13,7 @@ namespace creode\getaddressio\assetbundles\getaddressio;
 use Craft;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
+use hiqdev\yii2\assets\select2\Select2Asset;
 
 /**
  * @author    Creode <contact@creode.co.uk>
@@ -32,15 +33,16 @@ class GetAddressIoAsset extends AssetBundle
         $this->sourcePath = "@creode/getaddressio/assetbundles/getaddressio/dist";
 
         $this->depends = [
-            CpAsset::class,
+            AssetBundle::class,
+            Select2Asset::class,
         ];
 
         $this->js = [
-            'js/GetAddressIo.js',
+            'js/get-address-io.js',
         ];
 
         $this->css = [
-            'css/GetAddressIo.css',
+            'css/get-address-io.css',
         ];
 
         parent::init();

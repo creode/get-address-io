@@ -31,7 +31,7 @@ class AjaxLookupController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = ['autocomplete'];
 
     // Public Methods
     // =========================================================================
@@ -39,20 +39,18 @@ class AjaxLookupController extends Controller
     /**
      * @return mixed
      */
-    public function actionIndex()
+    public function actionAutocomplete()
     {
-        $result = 'Welcome to the AjaxLookupController actionIndex() method';
+        // This request is ajax only.
+        if (!$this->request->isAjax()) {
+            return $this->asJson(
+                []
+            );
+        }
 
-        return $result;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function actionDoSomething()
-    {
-        $result = 'Welcome to the AjaxLookupController actionDoSomething() method';
-
-        return $result;
+        $query = Craft::$app->request->getQueryParam('term');
+        return $this->asJson(
+            GetAddressIo::$plugin->addressLookupService->autocomplete($query)
+        );
     }
 }

@@ -10,20 +10,23 @@
 
 namespace creode\getaddressio;
 
-use creode\getaddressio\services\GetAddressLookupService;
-use creode\getaddressio\models\Settings;
-use creode\getaddressio\widgets\AddressLookupUsage as AddressLookupUsageWidget;
-
 use Craft;
+use craft\web\View;
+use yii\base\Event;
+
 use craft\base\Plugin;
+use craft\web\UrlManager;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
-use craft\web\UrlManager;
 use craft\services\Dashboard;
-use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
+use creode\getaddressio\models\Settings;
+use craft\events\RegisterTemplateRootsEvent;
 
-use yii\base\Event;
+use craft\events\RegisterComponentTypesEvent;
+use creode\getaddressio\services\AddressGuzzleFactoryService;
+use creode\getaddressio\services\AddressLookupService;
+use creode\getaddressio\widgets\AddressLookupUsage as AddressLookupUsageWidget;
 
 /**
  * Class GetAddressIo
@@ -32,7 +35,8 @@ use yii\base\Event;
  * @package   GetAddressIo
  * @since     1.0.0
  *
- * @property  GetAddressLookupService $getAddressLookupService
+ * @property  AddressLookupService $addressLookupService
+ * @property  AddressGuzzleFactoryService $addressGuzzleFactoryService
  */
 class GetAddressIo extends Plugin
 {
@@ -73,13 +77,12 @@ class GetAddressIo extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['siteActionTrigger1'] = 'get-address-io/ajax-lookup';
-            }
-        );
+        $this->setTemplateRoots();
+
+        $this->setComponents([
+            'addressLookupService' => AddressLookupService::class,
+            'addressGuzzleFactoryService' => AddressGuzzleFactoryService::class,
+        ]);
 
         Event::on(
             UrlManager::class,
@@ -118,6 +121,17 @@ class GetAddressIo extends Plugin
 
     // Protected Methods
     // =========================================================================
+
+    protected function setTemplateRoots()
+    {
+        Event::on(
+            View::class,
+            View::EVENT_REGISTER_SITE_TEMPLATE_ROOTS,
+            function (RegisterTemplateRootsEvent $event) {
+                $event->roots['get-address-io'] = __DIR__ . '/templates/get-address-io';
+            }
+        );
+    }
 
     /**
      * @inheritdoc

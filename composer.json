@@ -1,4 +1,10 @@
 {
+    "repositories": [
+        {
+          "type": "composer",
+          "url": "https://asset-packagist.org"
+        }
+    ],
     "name": "creode/get-address-io",
     "description": "Integrates Craft CMS with the getaddress IO service for autocompletion of address' using UK Postcodes.",
     "type": "craft-plugin",
@@ -22,7 +28,9 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0"
+        "craftcms/cms": "^3.0.0",
+        "hiqdev/yii2-asset-select2": "^4.0",
+        "guzzlehttp/guzzle": "^6.0"
     },
     "require-dev": {
       "craftcms/cms": "^3.2.0",
@@ -52,7 +60,8 @@
         "documentationUrl": "https://github.com/creode/get-address-io/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/creode/get-address-io/master/CHANGELOG.md",
         "components": {
-            "getAddressLookupService": "creode\\getaddressio\\services\\GetAddressLookupService"
+            "addressLookupService": "creode\\getaddressio\\services\\AddressLookupService",
+            "addressGuzzleFactoryService": "creode\\getaddressio\\services\\AddressGuzzleFactoryService"
         },
         "class": "creode\\getaddressio\\GetAddressIo"
     }

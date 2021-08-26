@@ -14,27 +14,32 @@ use creode\getaddressio\GetAddressIo;
 
 use Craft;
 use craft\base\Component;
+use GuzzleHttp\Client as GuzzleClient;
 
 /**
  * @author    Creode <contact@creode.co.uk>
  * @package   GetAddressIo
  * @since     1.0.0
  */
-class GetAddressLookupService extends Component
+class AddressGuzzleFactoryService extends Component
 {
     // Public Methods
     // =========================================================================
 
-    /*
-     * @return mixed
+    /**
+     * Builds a predefined guzzle client with the correct options.
+     *
+     * @return GuzzleClient
      */
-    public function exampleService()
+    public function getClient()
     {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (GetAddressIo::$plugin->getSettings()->someAttribute) {
-        }
-
-        return $result;
+        return new GuzzleClient(
+            [
+                'base_uri' => 'https://api.getAddress.io/',
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                ]
+            ]
+        );
     }
 }
