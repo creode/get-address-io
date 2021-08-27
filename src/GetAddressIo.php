@@ -15,16 +15,12 @@ use craft\web\View;
 use yii\base\Event;
 
 use craft\base\Plugin;
-use craft\web\UrlManager;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
 use craft\services\Dashboard;
-use craft\events\RegisterUrlRulesEvent;
 use creode\getaddressio\models\Settings;
 use craft\events\RegisterTemplateRootsEvent;
 
 use craft\events\RegisterComponentTypesEvent;
-use creode\getaddressio\services\AddressGuzzleFactoryService;
+use creode\getaddressio\services\GuzzleClientFactoryService;
 use creode\getaddressio\services\AddressLookupService;
 use creode\getaddressio\widgets\AddressLookupUsage as AddressLookupUsageWidget;
 
@@ -36,7 +32,7 @@ use creode\getaddressio\widgets\AddressLookupUsage as AddressLookupUsageWidget;
  * @since     1.0.0
  *
  * @property  AddressLookupService $addressLookupService
- * @property  AddressGuzzleFactoryService $addressGuzzleFactoryService
+ * @property  GuzzleClientFactoryService $guzzleClientFactoryService
  */
 class GetAddressIo extends Plugin
 {
@@ -81,31 +77,15 @@ class GetAddressIo extends Plugin
 
         $this->setComponents([
             'addressLookupService' => AddressLookupService::class,
-            'addressGuzzleFactoryService' => AddressGuzzleFactoryService::class,
+            'guzzleClientFactoryService' => GuzzleClientFactoryService::class,
         ]);
 
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['cpActionTrigger1'] = 'get-address-io/ajax-lookup/do-something';
-            }
-        );
-
+        // Registers a new Dashboard Widget
         Event::on(
             Dashboard::class,
             Dashboard::EVENT_REGISTER_WIDGET_TYPES,
             function (RegisterComponentTypesEvent $event) {
                 $event->types[] = AddressLookupUsageWidget::class;
-            }
-        );
-
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                }
             }
         );
 
@@ -122,13 +102,16 @@ class GetAddressIo extends Plugin
     // Protected Methods
     // =========================================================================
 
+    /**
+     * Sets up the ability for Craft templates to overwrite the ones in this plugin.
+     */
     protected function setTemplateRoots()
     {
         Event::on(
             View::class,
             View::EVENT_REGISTER_SITE_TEMPLATE_ROOTS,
             function (RegisterTemplateRootsEvent $event) {
-                $event->roots['get-address-io'] = __DIR__ . '/templates/get-address-io';
+                $event->roots['_get-address-io'] = __DIR__ . '/templates/get-address-io';
             }
         );
     }

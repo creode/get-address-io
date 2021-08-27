@@ -16,9 +16,9 @@ class ExampleFunctionalCest
     /**
      *
      */
-    public function testCraftEdition(FunctionalTester $I)
-    {
-        $I->amOnPage('?p=/');
-        $I->seeResponseCodeIs(200);
-    }
+    // public function testCraftEdition(FunctionalTester $I)
+    // {
+    //     $I->amOnPage('?p=/');
+    //     $I->seeResponseCodeIs(200);
+    // }
 }

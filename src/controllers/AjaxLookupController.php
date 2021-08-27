@@ -10,10 +10,11 @@
 
 namespace creode\getaddressio\controllers;
 
-use creode\getaddressio\GetAddressIo;
-
 use Craft;
+
 use craft\web\Controller;
+use yii\web\NotFoundHttpException;
+use creode\getaddressio\GetAddressIo;
 
 /**
  * @author    Creode <contact@creode.co.uk>
@@ -42,15 +43,16 @@ class AjaxLookupController extends Controller
     public function actionAutocomplete()
     {
         // This request is ajax only.
-        if (!$this->request->isAjax()) {
-            return $this->asJson(
-                []
-            );
+        if (!$this->request->isAjax) {
+            throw new NotFoundHttpException();
         }
 
-        $query = Craft::$app->request->getQueryParam('term');
         return $this->asJson(
-            GetAddressIo::$plugin->addressLookupService->autocomplete($query)
+            GetAddressIo::$plugin
+                ->addressLookupService
+                ->autocomplete(
+                    Craft::$app->request->getQueryParam('term')
+                )
         );
     }
 }
