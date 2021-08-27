@@ -47,7 +47,7 @@ jobs:
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
     - name: Setup Tests
-      run: cp tests/example-env-ci tests/.env
+      run: cp tests/.env-ci tests/.env
 
     - name: Run test suite
       run: composer run-script test
