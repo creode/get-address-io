@@ -20,7 +20,7 @@ use craft\base\Component;
  * @package   GetAddressIo
  * @since     1.0.0
  */
-class GetAddressLookupService extends Component
+class AddressLookupService extends Component
 {
     // Public Methods
     // =========================================================================
@@ -28,13 +28,15 @@ class GetAddressLookupService extends Component
     /*
      * @return mixed
      */
-    public function exampleService()
+    public function autocomplete(string $searchTerm)
     {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (GetAddressIo::$plugin->getSettings()->someAttribute) {
+        if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
+            // Throw an error.
+            throw new \Exception('getaddress.io API Key not set. Please add this to plugins configuration screen.');
         }
 
-        return $result;
+        return GetAddressIo::$plugin
+            ->guzzleClientFactoryService
+            ->autocomplete($searchTerm);
     }
 }

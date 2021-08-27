@@ -28,10 +28,20 @@ class Settings extends Model
     /**
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $apiKey = '';
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * Gets the API Key out of the environment variable.
+     *
+     * @return void
+     */
+    public function getAPIKey()
+    {
+        return Craft::parseEnv($this->apiKey);
+    }
 
     /**
      * @inheritdoc
@@ -39,8 +49,7 @@ class Settings extends Model
     public function rules()
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            ['apiKey', 'string'],
         ];
     }
 }

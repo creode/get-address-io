@@ -15,12 +15,13 @@
 
 {% import "_includes/forms" as forms %}
 
-{% do view.registerAssetBundle("creode\\getaddressio\\assetbundles\\getaddressio\\GetAddressIoAsset") %}
-
-{{ forms.textField({
-    label: 'Some Field',
-    instructions: 'Enter some setting here.',
-    id: 'someAttribute',
-    name: 'someAttribute',
-    value: settings['someAttribute']})
-}}
+{{ forms.autosuggestField({
+  label: "getaddress.io API Key"|t('getaddressio'),
+  instructions: "Your API Key provided by getaddress.io."|t('getaddressio'),
+  id: 'apiKey',
+  class: 'ltr',
+  name: 'apiKey',
+  suggestEnvVars: true,
+  value: settings.apiKey,
+  errors: settings.getErrors('apiKey')
+}) }}
