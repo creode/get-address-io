@@ -50,7 +50,7 @@ jobs:
       run: cp tests/.env-ci tests/.env
 
     - name: Run test suite
-      run: composer run-script test
+      run: composer run-script tests
       env:
         DB_USER: root
         DB_SERVER: 127.0.0.1
