@@ -6,7 +6,7 @@
         }
     ],
     "name": "creode/get-address-io",
-    "description": "Integrates Craft CMS with the getaddress IO service for autocompletion of address' using UK Postcodes.",
+    "description": "Integrates Craft CMS with the getaddress IO service for autocompletion of address' in the UK.",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [

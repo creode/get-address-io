@@ -1,6 +1,6 @@
 # Get Address IO plugin for Craft CMS 3.x
 
-Integrates Craft CMS with the getaddress IO service for autocompletion address' using UK Postcodes.
+Integrates Craft CMS with the getaddress IO service for autocompletion of address' in the UK.
 
 ![Screenshot](resources/img/plugin-logo.png)
 
