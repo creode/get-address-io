@@ -2,7 +2,7 @@
 /**
  * Get Address IO plugin for Craft CMS 3.x
  *
- * Integrates Craft CMS with the getaddress IO service for autocompletion address' using UK Postcoes
+ * Integrates Craft CMS with the getaddress IO service for autocompletion of address' in the UK.
  *
  * @link      https://creode.co.uk
  * @copyright Copyright (c) 2021 Creode <contact@creode.co.uk>
@@ -28,11 +28,15 @@ class AddressLookupService extends Component
     /*
      * @return mixed
      */
-    public function autocomplete(string $searchTerm)
+    public function autocomplete(?string $searchTerm)
     {
         if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
             // Throw an error.
             throw new \Exception('getaddress.io API Key not set. Please add this to plugins configuration screen.');
+        }
+
+        if (! $searchTerm) {
+            return;
         }
 
         return GetAddressIo::$plugin
