@@ -87,7 +87,7 @@ var getAddressLookup = {
 
     focusSelectAutocompleteOnOpen: function() {
         jQuery(document).on('select2:open', () => {
-            jQuery('.select2-container--open .select2-search__field').focus();
+            jQuery('.select2-container--open .select2-search__field').get(0).focus();
         });
     },
 
