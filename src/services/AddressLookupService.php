@@ -28,11 +28,15 @@ class AddressLookupService extends Component
     /*
      * @return mixed
      */
-    public function autocomplete(string $searchTerm)
+    public function autocomplete(?string $searchTerm)
     {
         if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
             // Throw an error.
             throw new \Exception('getaddress.io API Key not set. Please add this to plugins configuration screen.');
+        }
+
+        if (! $searchTerm) {
+            return;
         }
 
         return GetAddressIo::$plugin
