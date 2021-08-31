@@ -41,10 +41,9 @@ var getAddressLookup = {
                 url: '/actions/get-address-io/ajax-lookup/autocomplete',
                 dataType: 'json',
                 data: function (params) {
-                    var query = {
+                    return {
                         term: params.term,
-                    }
-                    return query;
+                    };
                 },
                 processResults: function(data) {
                     return self.formatAddressResults(data);
