@@ -66,15 +66,19 @@ var getAddressLookup = {
             };
         }
 
-        if (lookupAddressData.response.suggestions.length > 0) {
-            for (var i = 0; i < lookupAddressData.response.suggestions.length; i++) {
-                var suggestion = lookupAddressData.response.suggestions[i];
-                var result = {
-                    id:suggestion.id,
-                    text:suggestion.address
-                }
-                results.push(result);
+        if (lookupAddressData.response.suggestions.length <= 0) {
+            return {
+                results: results
+            };
+        }
+
+        for (var i = 0; i < lookupAddressData.response.suggestions.length; i++) {
+            var suggestion = lookupAddressData.response.suggestions[i];
+            var result = {
+                id:suggestion.id,
+                text:suggestion.address
             }
+            results.push(result);
         }
 
         return {
