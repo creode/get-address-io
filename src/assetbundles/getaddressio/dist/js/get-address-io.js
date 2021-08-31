@@ -45,8 +45,8 @@ var getAddressLookup = {
                         term: params.term,
                     };
                 },
-                processResults: function(data) {
-                    return self.formatAddressResults(data);
+                processResults: function(lookupAddressData) {
+                    return self.formatAddressResults(lookupAddressData);
                 }
             }
         });
