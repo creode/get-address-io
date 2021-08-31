@@ -54,13 +54,19 @@ var getAddressLookup = {
 
     formatAddressResults: function(lookupAddressData) {
         var results = [];
-        if (!lookupAddressData || lookupAddressData.response.hasErrors) {
+        if (!lookupAddressData || !lookupAddressData.response) {
             return {
                 results: results
             };
         }
 
-        if (lookupAddressData.response && lookupAddressData.response.suggestions.length > 0) {
+        if (lookupAddressData.response.hasErrors) {
+            return {
+                results: results
+            };
+        }
+
+        if (lookupAddressData.response.suggestions.length > 0) {
             for (var i = 0; i < lookupAddressData.response.suggestions.length; i++) {
                 var suggestion = lookupAddressData.response.suggestions[i];
                 var result = {
