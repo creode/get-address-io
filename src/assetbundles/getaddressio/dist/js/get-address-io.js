@@ -46,13 +46,13 @@ var getAddressLookup = {
                     };
                 },
                 processResults: function(lookupAddressData) {
-                    return self.formatAddressResults(lookupAddressData);
+                    return self.formatAddressResultsForSelect2(lookupAddressData);
                 }
             }
         });
     },
 
-    formatAddressResults: function(lookupAddressData) {
+    formatAddressResultsForSelect2: function(lookupAddressData) {
         var results = [];
         if (!lookupAddressData || !lookupAddressData.response) {
             return {
