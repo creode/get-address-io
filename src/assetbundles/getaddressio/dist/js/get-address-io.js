@@ -20,6 +20,8 @@ var getAddressLookup = {
         }
 
         this.registerSelectListener();
+        this.focusSelectAutocompleteOnOpen();
+        this.triggerAddressPopulateEvent();
     },
 
     getElements: function() {
@@ -44,7 +46,9 @@ var getAddressLookup = {
                     }
                     return query;
                 },
-                processResults: self.formatAddressResults()
+                processResults: function(data) {
+                    return self.formatAddressResults(data);
+                }
             }
         });
     },
