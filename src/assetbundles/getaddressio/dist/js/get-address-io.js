@@ -74,11 +74,10 @@ var getAddressLookup = {
 
         for (var i = 0; i < lookupAddressData.response.suggestions.length; i++) {
             var suggestion = lookupAddressData.response.suggestions[i];
-            var result = {
+            results.push({
                 id:suggestion.id,
                 text:suggestion.address
-            }
-            results.push(result);
+            });
         }
 
         return {
