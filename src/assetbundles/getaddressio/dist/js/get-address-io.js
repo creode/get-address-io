@@ -92,7 +92,7 @@ var getAddressLookup = {
     },
 
     triggerAddressPopulateEvent: function() {
-        jQuery(this.elements.lookupSelectField).on('select2:select', function (e) {
+        this.elements.lookupSelectField.on('select2:select', function (e) {
             // var data = e.params.data;
             // var id = data.id;
             // jQuery.get('https://api.getaddress.io/get/', {'id':id}, function (address, status)
