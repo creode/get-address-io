@@ -54,13 +54,7 @@ var getAddressLookup = {
 
     formatAddressResults: function(lookupAddressData) {
         var results = [];
-        if (!lookupAddressData) {
-            return {
-                results: results
-            };
-        }
-
-        if (lookupAddressData.response.hasErrors) {
+        if (!lookupAddressData || lookupAddressData.response.hasErrors) {
             return {
                 results: results
             };
