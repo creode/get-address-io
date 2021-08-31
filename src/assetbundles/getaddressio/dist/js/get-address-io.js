@@ -9,60 +9,94 @@
  * @package   GetAddressIo
  * @since     1.0.0
  */
-$('[name="address-lookup"]').select2({
-    ajax: {
-        url: '/actions/get-address-io/ajax-lookup/autocomplete',
-        dataType: 'json',
-        data: function (params) {
-            var query = {
-                term: params.term,
-            }
+var getAddressLookup = {
+    elements: {
+        lookupSelectField: false
+    },
 
-            // Query parameters will be ?term=[term]
-            return query;
-        },
-        processResults: function (data) {
-            var results = [];
-            if (!data) {
-                return {
-                    results: results
-                };
-            }
+    init: function() {
+        if (!this.getElements()) {
+            return;
+        }
 
-            if (data.response.hasErrors) {
-                return {
-                    results: results
-                };
-            }
+        this.registerSelectListener();
+    },
 
-            if (data.response && data.response.suggestions.length > 0) {
+    getElements: function() {
+        this.elements.lookupSelectField = jQuery('select[name="address-lookup"]');
+        if (!this.elements.lookupSelectField.length) {
+            return false;
+        }
 
-                for (var i = 0; i < data.response.suggestions.length; i++) {
-                    var suggestion = data.response.suggestions[i];
-                    var result = {
-                        id:suggestion.id,
-                        text:suggestion.address
+        return true;
+    },
+
+    registerSelectListener: function() {
+        var self = this;
+
+        this.elements.lookupSelectField.select2({
+            ajax: {
+                url: '/actions/get-address-io/ajax-lookup/autocomplete',
+                dataType: 'json',
+                data: function (params) {
+                    var query = {
+                        term: params.term,
                     }
-                    results.push(result);
-                }
+                    return query;
+                },
+                processResults: self.formatAddressResults()
             }
+        });
+    },
 
+    formatAddressResults: function(lookupAddressData) {
+        var results = [];
+        if (!lookupAddressData) {
             return {
                 results: results
             };
         }
+
+        if (lookupAddressData.response.hasErrors) {
+            return {
+                results: results
+            };
+        }
+
+        if (lookupAddressData.response && lookupAddressData.response.suggestions.length > 0) {
+            for (var i = 0; i < lookupAddressData.response.suggestions.length; i++) {
+                var suggestion = lookupAddressData.response.suggestions[i];
+                var result = {
+                    id:suggestion.id,
+                    text:suggestion.address
+                }
+                results.push(result);
+            }
+        }
+
+        return {
+            results: results
+        };
+    },
+
+    focusSelectAutocompleteOnOpen: function() {
+        jQuery(document).on('select2:open', () => {
+            document.querySelector('.select2-container--open .select2-search__field').focus();
+        });
+    },
+
+    triggerAddressPopulateEvent: function() {
+        jQuery(this.elements.lookupSelectField).on('select2:select', function (e) {
+            // var data = e.params.data;
+            // var id = data.id;
+            // jQuery.get('https://api.getaddress.io/get/', {'id':id}, function (address, status)
+            // {
+            //     jQuery(document).trigger('get-address-io-lookup', address);
+            // });
+        });
     }
-});
+}
 
-$('[name="address-lookup"]').on('select2:select', function (e) {
-    // var data = e.params.data;
-    // var id = data.id;
-    // $.get('https://api.getaddress.io/get/', {'id':id}, function (address, status)
-    // {
-    //     jQuery(document).trigger('get-address-io-lookup', address);
-    // });
-});
-
-jQuery(document).on('select2:open', () => {
-    document.querySelector('.select2-container--open .select2-search__field').focus();
+jQuery(document).ready(function() {
+    getAddressLookup.init();
 });
