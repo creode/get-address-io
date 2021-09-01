@@ -42,9 +42,10 @@ var getAddressIo = {
                 dataType: 'json',
                 type: "POST",
                 data: function (params) {
-                    var requestData = {};
+                    var requestData = {
+                        'term': params.term
+                    };
                     requestData[Craft.csrfTokenName] = Craft.csrfTokenValue;
-                    requestData['term'] = params.term;
                     return requestData;
                 },
                 processResults: function(lookupAddressData) {
