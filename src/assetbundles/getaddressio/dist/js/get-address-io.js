@@ -40,10 +40,12 @@ var getAddressIo = {
             ajax: {
                 url: '/actions/get-address-io/ajax-lookup/autocomplete',
                 dataType: 'json',
+                type: "POST",
                 data: function (params) {
-                    return {
-                        term: params.term,
-                    };
+                    var requestData = {};
+                    requestData[Craft.csrfTokenName] = Craft.csrfTokenValue;
+                    requestData['term'] = params.term;
+                    return requestData;
                 },
                 processResults: function(lookupAddressData) {
                     return self.formatAddressResultsForSelect2(lookupAddressData);
@@ -95,7 +97,11 @@ var getAddressIo = {
         this.elements.lookupSelectField.on('select2:select', function (e) {
             var data = e.params.data;
             var id = data.id;
-            jQuery.get('/actions/get-address-io/ajax-lookup/get-by-id', {'id':id}, function (address, status)
+            var postData = {};
+
+            postData['id'] = id;
+            postData[Craft.csrfTokenName] = Craft.csrfTokenValue;
+            jQuery.post('/actions/get-address-io/ajax-lookup/get-by-id', postData, function (address, status)
             {
                 if (!address.response || address.response.hasErrors) {
                     throw Error('Could not obtain address.');

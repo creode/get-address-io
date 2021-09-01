@@ -45,6 +45,8 @@ class AjaxLookupController extends Controller
      */
     public function actionAutocomplete()
     {
+        $this->requirePostRequest();
+
         // This request is ajax only.
         if (!$this->request->isAjax) {
             throw new NotFoundHttpException();
@@ -54,20 +56,26 @@ class AjaxLookupController extends Controller
             GetAddressIo::$plugin
                 ->addressLookupService
                 ->autocomplete(
-                    Craft::$app->request->getQueryParam('term')
+                    Craft::$app->request->getBodyParam('term')
                 )
         );
     }
 
     /**
      * Get an address out of the https://getaddress.io API using the id.
-     * This routes url is /actions/get-address-io/ajax-lookup/get-by-id?id="<the-id>"
+     * This routes url is /actions/get-address-io/ajax-lookup/get-by-id
      *
      * @param string|null $id
      * @return yii\web\Response
      */
-    public function actionGetById(?string $id)
+    public function actionGetById()
     {
+        $this->requirePostRequest();
+
+        $id = Craft::$app
+            ->getRequest()
+            ->getRequiredParam('id');
+
         // This request is ajax only.
         if (!$this->request->isAjax) {
             throw new NotFoundHttpException();
@@ -84,18 +92,24 @@ class AjaxLookupController extends Controller
 
     /**
      * Exposes the results of the Autocomplete functionality on the https://getaddress.io API.
-     * This route url is /actions/get-address-io/ajax-lookup/get-by-postcode?postcode=<the-postcode>
+     * This route url is /actions/get-address-io/ajax-lookup/get-by-postcode
      *
      * @param string|null $postcode
      * @return yii\web\Response
      */
-    public function actionGetByPostcode(?string $postcode)
+    public function actionGetByPostcode()
     {
+        // Forces CSRF Verification.
+        $this->requirePostRequest();
+
         // This request is ajax only.
         if (!$this->request->isAjax) {
             throw new NotFoundHttpException();
         }
 
+        $postcode = Craft::$app
+            ->getRequest()
+            ->getRequiredParam('postcode');
         if ($postcode === '' || $postcode === null) {
             return $this->asJson([
                 'hasErrors' => true,

@@ -1,3 +1,12 @@
 {% do view.registerAssetBundle("creode\\getaddressio\\assetbundles\\getaddressio\\GetAddressIoAsset") %}
 
+{% set csrfToken = {
+    csrfTokenName: craft.app.config.general.csrfTokenName,
+    csrfTokenValue: craft.app.request.csrfToken,
+} %}
+
+{% js %}
+    window.Craft = {{ csrfToken|json_encode|raw }};
+{% endjs %}
+
 <select class="address-lookup form-item__textfield" name="address-lookup"></select>
