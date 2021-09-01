@@ -10,6 +10,8 @@
 
 namespace creode\getaddressio\services;
 
+use creode\getaddressio\GetAddressIo;
+use GuzzleHttp\Client as GuzzleClient;
 use creode\getaddressio\contracts\services\ApiFactory;
 
 /**
@@ -19,12 +21,14 @@ use creode\getaddressio\contracts\services\ApiFactory;
  */
 class GuzzleClientFactoryService extends ApiFactory
 {
+    const BASE_ADDRESS_API_URL = 'https://api.getAddress.io/';
+
     // Public Methods
     // =========================================================================
 
     public function getAddressesByPostcode(string $postcode): object
     {
-        return $this->callAddressAPI("find/$postcode", ['expand' => 'True']);
+        return $this->get("find/$postcode", ['expand' => 'True']);
     }
 
     /**
@@ -32,7 +36,7 @@ class GuzzleClientFactoryService extends ApiFactory
      */
     public function autocomplete(string $searchTerm): object
     {
-        return $this->callAddressAPI("autocomplete/$searchTerm");
+        return $this->get("autocomplete/$searchTerm");
     }
 
     /**
@@ -40,9 +44,78 @@ class GuzzleClientFactoryService extends ApiFactory
      */
     public function getAddressById(string $id): object
     {
-        return $this->callAddressAPI("/get/$id");
+        return $this->get("/get/$id");
     }
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * Accepts a url parameter and pushes a GET request to the API with the given url.
+     *
+     * @param string $url The url to call.
+     * @param array $parameters Any query parameters provided.
+     * @return object
+     */
+    protected function get($url, $parameters = [])
+    {
+        if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
+            // Throw an error.
+            throw new \Exception('getaddress.io API Key not set. Please add this to plugins configuration screen.');
+        }
+
+        $client = $this->getClient();
+
+        $response = false;
+        $errors = [];
+
+        $queryParams = ['api-key' => GetAddressIo::$plugin->getSettings()->getAPIKey()];
+        $queryParams = array_merge($queryParams, $parameters);
+
+        try {
+            $response = $client->request(
+                'GET',
+                $url,
+                [
+                    'query' => $queryParams,
+                ],
+            );
+        } catch (\Exception $e) {
+            $errors[] = (object) [
+                'code'    => $e->getCode(),
+                'message' => ! empty(
+                    $this->errorMessages[$e->getCode()]
+                ) ? $this->errorMessages[$e->getCode()] : 'An unknown error has occured.',
+            ];
+        }
+
+        $responseContent = '';
+        if ($response) {
+            $responseContent = json_decode(
+                $response->getBody()
+                    ->getContents()
+            );
+        }
+
+        return (object) [
+            'response' => $responseContent,
+            'errors' => $errors,
+            'hasErrors' => (bool) count($errors),
+        ];
+    }
+
+    /**
+     * Builds a predefined guzzle client with the correct options.
+     *
+     * @return GuzzleClient
+     */
+    protected function getClient()
+    {
+        return new GuzzleClient([
+            'base_uri' => self::BASE_ADDRESS_API_URL,
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ]
+        ]);
+    }
 }

@@ -3,8 +3,6 @@
 namespace creode\getaddressio\contracts\services;
 
 use craft\base\Component;
-use GuzzleHttp\Client as GuzzleClient;
-use creode\getaddressio\GetAddressIo;
 
 abstract class ApiFactory extends Component
 {
@@ -41,73 +39,4 @@ abstract class ApiFactory extends Component
      * @return object
      */
     abstract public function getAddressesByPostcode(string $postcode): object;
-
-    /**
-     * Builds a predefined guzzle client with the correct options.
-     *
-     * @return GuzzleClient
-     */
-    protected function get()
-    {
-        return new GuzzleClient([
-            'base_uri' => 'https://api.getAddress.io/',
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ]
-        ]);
-    }
-
-    /**
-     * Accepts a url parameter and pushes a GET request to the API with the given url.
-     *
-     * @param string $url The url to call.
-     * @param array $parameters Any query parameters provided.
-     * @return object
-     */
-    protected function callAddressAPI($url, $parameters = [])
-    {
-        if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
-            // Throw an error.
-            throw new \Exception('getaddress.io API Key not set. Please add this to plugins configuration screen.');
-        }
-
-        $client = $this->get();
-
-        $response = false;
-        $errors = [];
-
-        $queryParams = ['api-key' => GetAddressIo::$plugin->getSettings()->getAPIKey()];
-        $queryParams = array_merge($queryParams, $parameters);
-
-        try {
-            $response = $client->request(
-                'GET',
-                $url,
-                [
-                    'query' => $queryParams,
-                ],
-            );
-        } catch (\Exception $e) {
-            $errors[] = (object) [
-                'code'    => $e->getCode(),
-                'message' => ! empty(
-                    $this->errorMessages[$e->getCode()]
-                ) ? $this->errorMessages[$e->getCode()] : 'An unknown error has occured.',
-            ];
-        }
-
-        $responseContent = '';
-        if ($response) {
-            $responseContent = json_decode(
-                $response->getBody()
-                    ->getContents()
-            );
-        }
-
-        return (object) [
-            'response' => $responseContent,
-            'errors' => $errors,
-            'hasErrors' => (bool) count($errors),
-        ];
-    }
 }
