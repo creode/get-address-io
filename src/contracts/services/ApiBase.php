@@ -1,8 +1,17 @@
 <?php
+/**
+ * Get Address IO plugin for Craft CMS 3.x
+ *
+ * Integrates Craft CMS with the getaddress IO service for autocompletion of address' in the UK.
+ *
+ * @link      https://creode.co.uk
+ * @copyright Copyright (c) 2021 Creode <contact@creode.co.uk>
+ */
 
 namespace creode\getaddressio\contracts\services;
 
 use craft\base\Component;
+use creode\getaddressio\contracts\ApiResponse;
 
 abstract class ApiBase extends Component
 {
@@ -22,9 +31,9 @@ abstract class ApiBase extends Component
      * function.
      *
      * @param string $searchTerm
-     * @return object
+     * @return ApiResponse
      */
-    public function autocomplete(string $searchTerm): object
+    public function autocomplete(string $searchTerm): ApiResponse
     {
         return $this->get("autocomplete/$searchTerm");
     }
@@ -33,9 +42,9 @@ abstract class ApiBase extends Component
      * Gets an Address from the API with the provided ID.
      *
      * @param string $id
-     * @return object
+     * @return ApiResponse
      */
-    public function getAddressById(string $id): object
+    public function getAddressById(string $id): ApiResponse
     {
         return $this->get("/get/$id");
     }
@@ -44,9 +53,9 @@ abstract class ApiBase extends Component
      * Gets all address' associated to a provided postcode.
      *
      * @param string $postcode
-     * @return object
+     * @return ApiResponse
      */
-    public function getAddressesByPostcode(string $postcode): object
+    public function getAddressesByPostcode(string $postcode): ApiResponse
     {
         return $this->get("find/$postcode", ['expand' => 'True']);
     }
@@ -56,7 +65,7 @@ abstract class ApiBase extends Component
      *
      * @param string $url The url to call.
      * @param array $parameters Any query parameters provided.
-     * @return object
+     * @return ApiResponse
      */
-    abstract protected function get($url, $parameters = []);
+    abstract protected function get($url, $parameters = []): ApiResponse;
 }

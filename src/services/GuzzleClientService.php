@@ -10,6 +10,7 @@
 
 namespace creode\getaddressio\services;
 
+use creode\getaddressio\contracts\ApiResponse;
 use creode\getaddressio\GetAddressIo;
 use GuzzleHttp\Client as GuzzleClient;
 use creode\getaddressio\contracts\services\ApiBase;
@@ -30,7 +31,7 @@ class GuzzleClientService extends ApiBase
     /**
      * @inheritdoc
      */
-    protected function get($url, $parameters = [])
+    protected function get($url, $parameters = []): ApiResponse
     {
         if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
             // Throw an error.
@@ -70,11 +71,7 @@ class GuzzleClientService extends ApiBase
             );
         }
 
-        return (object) [
-            'response' => $responseContent,
-            'errors' => $errors,
-            'hasErrors' => (bool) count($errors),
-        ];
+        return new ApiResponse($responseContent, $errors);
     }
 
     /**
