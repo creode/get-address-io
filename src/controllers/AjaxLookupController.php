@@ -32,13 +32,19 @@ class AjaxLookupController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['autocomplete'];
+    protected $allowAnonymous = ['autocomplete', 'get-by-id'];
 
     // Public Methods
     // =========================================================================
 
     /**
      * @return mixed
+
+    /**
+     * Exposes the results of the Autocomplete functionality on the https://getaddress.io API.
+     * This route url is /actions/get-address-io/ajax-lookup/autocomplete
+     *
+     * @return yii\web\Response
      */
     public function actionAutocomplete()
     {
@@ -52,6 +58,22 @@ class AjaxLookupController extends Controller
                 ->addressLookupService
                 ->autocomplete(
                     Craft::$app->request->getQueryParam('term')
+                )
+        );
+    }
+
+    public function actionGetById(?string $id)
+    {
+        // This request is ajax only.
+        if (!$this->request->isAjax) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->asJson(
+            GetAddressIo::$plugin
+                ->addressLookupService
+                ->getAddressById(
+                    $id
                 )
         );
     }

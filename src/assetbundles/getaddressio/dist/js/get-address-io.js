@@ -9,7 +9,7 @@
  * @package   GetAddressIo
  * @since     1.0.0
  */
-var getAddressLookup = {
+var getAddressIo = {
     elements: {
         lookupSelectField: false
     },
@@ -93,16 +93,20 @@ var getAddressLookup = {
 
     triggerAddressPopulateEvent: function() {
         this.elements.lookupSelectField.on('select2:select', function (e) {
-            // var data = e.params.data;
-            // var id = data.id;
-            // jQuery.get('https://api.getaddress.io/get/', {'id':id}, function (address, status)
-            // {
-            //     jQuery(document).trigger('get-address-io-lookup', address);
-            // });
+            var data = e.params.data;
+            var id = data.id;
+            jQuery.get('/actions/get-address-io/ajax-lookup/get-by-id', {'id':id}, function (address, status)
+            {
+                if (!address.response || address.response.hasErrors) {
+                    throw Error('Could not obtain address.');
+                }
+
+                jQuery(document).trigger('get-address-io-lookup', address.response);
+            });
         });
     }
 }
 
 jQuery(document).ready(function() {
-    getAddressLookup.init();
+    getAddressIo.init();
 });
