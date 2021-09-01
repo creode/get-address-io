@@ -96,11 +96,9 @@ var getAddressIo = {
 
     triggerAddressPopulateEvent: function() {
         this.elements.lookupSelectField.on('select2:select', function (e) {
-            var data = e.params.data;
-            var id = data.id;
-            var postData = {};
-
-            postData['id'] = id;
+            var postData = {
+                'id': e.params.data.id
+            };           
             postData[Craft.csrfTokenName] = Craft.csrfTokenValue;
             jQuery.post('/actions/get-address-io/ajax-lookup/get-by-id', postData, function (address, status)
             {
