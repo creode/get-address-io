@@ -24,36 +24,11 @@ class GuzzleClientService extends ApiBase
     // Public Methods
     // =========================================================================
 
-    public function getAddressesByPostcode(string $postcode): object
-    {
-        return $this->get("find/$postcode", ['expand' => 'True']);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function autocomplete(string $searchTerm): object
-    {
-        return $this->get("autocomplete/$searchTerm");
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAddressById(string $id): object
-    {
-        return $this->get("/get/$id");
-    }
-
     // Protected Methods
     // =========================================================================
 
     /**
-     * Accepts a url parameter and pushes a GET request to the API with the given url.
-     *
-     * @param string $url The url to call.
-     * @param array $parameters Any query parameters provided.
-     * @return object
+     * @inheritdoc
      */
     protected function get($url, $parameters = [])
     {

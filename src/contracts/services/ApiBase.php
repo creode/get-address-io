@@ -24,7 +24,10 @@ abstract class ApiBase extends Component
      * @param string $searchTerm
      * @return object
      */
-    abstract public function autocomplete(string $searchTerm): object;
+    public function autocomplete(string $searchTerm): object
+    {
+        return $this->get("autocomplete/$searchTerm");
+    }
 
     /**
      * Gets an Address from the API with the provided ID.
@@ -32,7 +35,10 @@ abstract class ApiBase extends Component
      * @param string $id
      * @return object
      */
-    abstract public function getAddressById(string $id): object;
+    public function getAddressById(string $id): object
+    {
+        return $this->get("/get/$id");
+    }
 
     /**
      * Gets all address' associated to a provided postcode.
@@ -40,5 +46,17 @@ abstract class ApiBase extends Component
      * @param string $postcode
      * @return object
      */
-    abstract public function getAddressesByPostcode(string $postcode): object;
+    public function getAddressesByPostcode(string $postcode): object
+    {
+        return $this->get("find/$postcode", ['expand' => 'True']);
+    }
+
+    /**
+     * Accepts a url parameter and pushes a GET request to the API with the given url.
+     *
+     * @param string $url The url to call.
+     * @param array $parameters Any query parameters provided.
+     * @return object
+     */
+    abstract protected function get($url, $parameters = []);
 }
