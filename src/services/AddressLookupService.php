@@ -28,7 +28,7 @@ class AddressLookupService extends Component
     public function getAddressesByPostcode(string $postcode)
     {
         return GetAddressIo::$plugin
-            ->guzzleClientFactoryService
+            ->api
             ->getAddressesByPostcode($postcode);
     }
 
@@ -46,7 +46,7 @@ class AddressLookupService extends Component
         }
 
         return GetAddressIo::$plugin
-            ->guzzleClientFactoryService
+            ->api
             ->autocomplete($searchTerm);
     }
 
@@ -59,7 +59,7 @@ class AddressLookupService extends Component
     public function getAddressById(string $id)
     {
         return GetAddressIo::$plugin
-            ->guzzleClientFactoryService
+            ->api
             ->getAddressById($id);
     }
 }

@@ -4,8 +4,10 @@ namespace creode\getaddressio\contracts\services;
 
 use craft\base\Component;
 
-abstract class ApiFactory extends Component
+abstract class ApiBase extends Component
 {
+    const BASE_ADDRESS_API_URL = 'https://api.getAddress.io/';
+
     protected $errorMessages = [
         400 => 'Invalid postcode data provided.',
         401 => 'Invalid API Key Configured.',

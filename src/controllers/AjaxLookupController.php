@@ -72,10 +72,6 @@ class AjaxLookupController extends Controller
     {
         $this->requirePostRequest();
 
-        $id = Craft::$app
-            ->getRequest()
-            ->getRequiredParam('id');
-
         // This request is ajax only.
         if (!$this->request->isAjax) {
             throw new NotFoundHttpException();
@@ -85,7 +81,9 @@ class AjaxLookupController extends Controller
             GetAddressIo::$plugin
                 ->addressLookupService
                 ->getAddressById(
-                    $id
+                    Craft::$app
+                        ->getRequest()
+                        ->getRequiredParam('id')
                 )
         );
     }
@@ -110,7 +108,7 @@ class AjaxLookupController extends Controller
         $postcode = Craft::$app
             ->getRequest()
             ->getRequiredParam('postcode');
-        if ($postcode === '' || $postcode === null) {
+        if (empty($postcode)) {
             return $this->asJson([
                 'hasErrors' => true,
                 'response' => [],

@@ -45,7 +45,7 @@ var getAddressIo = {
                     var requestData = {
                         'term': params.term
                     };
-                    requestData[Craft.csrfTokenName] = Craft.csrfTokenValue;
+                    requestData[csrfToken.csrfTokenName] = csrfToken.csrfTokenValue;
                     return requestData;
                 },
                 processResults: function(lookupAddressData) {
@@ -98,8 +98,8 @@ var getAddressIo = {
         this.elements.lookupSelectField.on('select2:select', function (e) {
             var postData = {
                 'id': e.params.data.id
-            };           
-            postData[Craft.csrfTokenName] = Craft.csrfTokenValue;
+            };
+            postData[csrfToken.csrfTokenName] = csrfToken.csrfTokenValue;
             jQuery.post('/actions/get-address-io/ajax-lookup/get-by-id', postData, function (address, status)
             {
                 if (!address.response || address.response.hasErrors) {

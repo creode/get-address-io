@@ -12,17 +12,15 @@ namespace creode\getaddressio\services;
 
 use creode\getaddressio\GetAddressIo;
 use GuzzleHttp\Client as GuzzleClient;
-use creode\getaddressio\contracts\services\ApiFactory;
+use creode\getaddressio\contracts\services\ApiBase;
 
 /**
  * @author    Creode <contact@creode.co.uk>
  * @package   GetAddressIo
  * @since     1.0.0
  */
-class GuzzleClientFactoryService extends ApiFactory
+class GuzzleClientService extends ApiBase
 {
-    const BASE_ADDRESS_API_URL = 'https://api.getAddress.io/';
-
     // Public Methods
     // =========================================================================
 
