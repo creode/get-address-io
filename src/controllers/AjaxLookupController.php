@@ -32,13 +32,10 @@ class AjaxLookupController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['autocomplete', 'get-by-id'];
+    protected $allowAnonymous = ['autocomplete', 'get-by-id', 'get-by-postcode'];
 
     // Public Methods
     // =========================================================================
-
-    /**
-     * @return mixed
 
     /**
      * Exposes the results of the Autocomplete functionality on the https://getaddress.io API.
@@ -48,6 +45,8 @@ class AjaxLookupController extends Controller
      */
     public function actionAutocomplete()
     {
+        $this->requirePostRequest();
+
         // This request is ajax only.
         if (!$this->request->isAjax) {
             throw new NotFoundHttpException();
@@ -57,13 +56,22 @@ class AjaxLookupController extends Controller
             GetAddressIo::$plugin
                 ->addressLookupService
                 ->autocomplete(
-                    Craft::$app->request->getQueryParam('term')
+                    Craft::$app->request->getBodyParam('term')
                 )
         );
     }
 
-    public function actionGetById(?string $id)
+    /**
+     * Get an address out of the https://getaddress.io API using the id.
+     * This routes url is /actions/get-address-io/ajax-lookup/get-by-id
+     *
+     * @param string|null $id
+     * @return yii\web\Response
+     */
+    public function actionGetById()
     {
+        $this->requirePostRequest();
+
         // This request is ajax only.
         if (!$this->request->isAjax) {
             throw new NotFoundHttpException();
@@ -73,7 +81,46 @@ class AjaxLookupController extends Controller
             GetAddressIo::$plugin
                 ->addressLookupService
                 ->getAddressById(
-                    $id
+                    Craft::$app
+                        ->getRequest()
+                        ->getRequiredParam('id')
+                )
+        );
+    }
+
+    /**
+     * Exposes the results of the Autocomplete functionality on the https://getaddress.io API.
+     * This route url is /actions/get-address-io/ajax-lookup/get-by-postcode
+     *
+     * @param string|null $postcode
+     * @return yii\web\Response
+     */
+    public function actionGetByPostcode()
+    {
+        // Forces CSRF Verification.
+        $this->requirePostRequest();
+
+        // This request is ajax only.
+        if (!$this->request->isAjax) {
+            throw new NotFoundHttpException();
+        }
+
+        $postcode = Craft::$app
+            ->getRequest()
+            ->getRequiredParam('postcode');
+        if (empty($postcode)) {
+            return $this->asJson([
+                'hasErrors' => true,
+                'response' => [],
+                'errors' => ['No postcode provided.']
+            ]);
+        }
+
+        return $this->asJson(
+            GetAddressIo::$plugin
+                ->addressLookupService
+                ->getAddressesByPostcode(
+                    $postcode
                 )
         );
     }

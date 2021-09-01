@@ -20,7 +20,7 @@ use creode\getaddressio\models\Settings;
 use craft\events\RegisterTemplateRootsEvent;
 
 use craft\events\RegisterComponentTypesEvent;
-use creode\getaddressio\services\GuzzleClientFactoryService;
+use creode\getaddressio\services\GuzzleClientService;
 use creode\getaddressio\services\AddressLookupService;
 use creode\getaddressio\widgets\AddressLookupUsage as AddressLookupUsageWidget;
 
@@ -32,7 +32,7 @@ use creode\getaddressio\widgets\AddressLookupUsage as AddressLookupUsageWidget;
  * @since     1.0.0
  *
  * @property  AddressLookupService $addressLookupService
- * @property  GuzzleClientFactoryService $guzzleClientFactoryService
+ * @property  GuzzleClientService $api
  */
 class GetAddressIo extends Plugin
 {
@@ -77,7 +77,7 @@ class GetAddressIo extends Plugin
 
         $this->setComponents([
             'addressLookupService' => AddressLookupService::class,
-            'guzzleClientFactoryService' => GuzzleClientFactoryService::class,
+            'api' => GuzzleClientService::class,
         ]);
 
         // Registers a new Dashboard Widget
