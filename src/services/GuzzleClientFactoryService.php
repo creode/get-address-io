@@ -22,7 +22,12 @@ class GuzzleClientFactoryService extends ApiFactory
     // Public Methods
     // =========================================================================
 
-    /*
+    public function getAddressesByPostcode(string $postcode): object
+    {
+        return $this->callAddressAPI("find/$postcode", ['expand' => 'True']);
+    }
+
+    /**
      * @inheritdoc
      */
     public function autocomplete(string $searchTerm): object
@@ -31,12 +36,9 @@ class GuzzleClientFactoryService extends ApiFactory
     }
 
     /**
-     * Gets an Address from the API with the provided ID.
-     *
-     * @param string $id
-     * @return object
+     * @inheritdoc
      */
-    public function getAddressById(string $id)
+    public function getAddressById(string $id): object
     {
         return $this->callAddressAPI("/get/$id");
     }

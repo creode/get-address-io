@@ -32,13 +32,10 @@ class AjaxLookupController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['autocomplete', 'get-by-id'];
+    protected $allowAnonymous = ['autocomplete', 'get-by-id', 'get-by-postcode'];
 
     // Public Methods
     // =========================================================================
-
-    /**
-     * @return mixed
 
     /**
      * Exposes the results of the Autocomplete functionality on the https://getaddress.io API.
@@ -62,6 +59,13 @@ class AjaxLookupController extends Controller
         );
     }
 
+    /**
+     * Get an address out of the https://getaddress.io API using the id.
+     * This routes url is /actions/get-address-io/ajax-lookup/get-by-id?id="<the-id>"
+     *
+     * @param string|null $id
+     * @return yii\web\Response
+     */
     public function actionGetById(?string $id)
     {
         // This request is ajax only.
@@ -74,6 +78,37 @@ class AjaxLookupController extends Controller
                 ->addressLookupService
                 ->getAddressById(
                     $id
+                )
+        );
+    }
+
+    /**
+     * Exposes the results of the Autocomplete functionality on the https://getaddress.io API.
+     * This route url is /actions/get-address-io/ajax-lookup/get-by-postcode?postcode=<the-postcode>
+     *
+     * @param string|null $postcode
+     * @return yii\web\Response
+     */
+    public function actionGetByPostcode(?string $postcode)
+    {
+        // This request is ajax only.
+        if (!$this->request->isAjax) {
+            throw new NotFoundHttpException();
+        }
+
+        if ($postcode === '' || $postcode === null) {
+            return $this->asJson([
+                'hasErrors' => true,
+                'response' => [],
+                'errors' => ['No postcode provided.']
+            ]);
+        }
+
+        return $this->asJson(
+            GetAddressIo::$plugin
+                ->addressLookupService
+                ->getAddressesByPostcode(
+                    $postcode
                 )
         );
     }
