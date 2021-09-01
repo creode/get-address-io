@@ -25,16 +25,15 @@ class AddressLookupService extends Component
     // Public Methods
     // =========================================================================
 
-    /*
-     * @return mixed
+    /**
+     * Handles the Get Address IO Autocomplete functionality.
+     *
+     * @param string|null $searchTerm The search term we will provide to Get Address' API.
+     *
+     * @return object
      */
     public function autocomplete(?string $searchTerm)
     {
-        if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
-            // Throw an error.
-            throw new \Exception('getaddress.io API Key not set. Please add this to plugins configuration screen.');
-        }
-
         if (! $searchTerm) {
             return;
         }
@@ -42,5 +41,18 @@ class AddressLookupService extends Component
         return GetAddressIo::$plugin
             ->guzzleClientFactoryService
             ->autocomplete($searchTerm);
+    }
+
+    /**
+     * Finds an address by a given ID.
+     *
+     * @param string $id
+     * @return object
+     */
+    public function getAddressById(string $id)
+    {
+        return GetAddressIo::$plugin
+            ->guzzleClientFactoryService
+            ->getAddressById($id);
     }
 }

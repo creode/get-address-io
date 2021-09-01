@@ -3,6 +3,8 @@
 namespace creode\getaddressio\contracts\services;
 
 use craft\base\Component;
+use GuzzleHttp\Client as GuzzleClient;
+use creode\getaddressio\GetAddressIo;
 
 abstract class ApiFactory extends Component
 {
@@ -23,4 +25,71 @@ abstract class ApiFactory extends Component
      * @return object
      */
     abstract public function autocomplete(string $searchTerm): object;
+
+    /**
+     * Builds a predefined guzzle client with the correct options.
+     *
+     * @return GuzzleClient
+     */
+    protected function get()
+    {
+        return new GuzzleClient([
+            'base_uri' => 'https://api.getAddress.io/',
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ]
+        ]);
+    }
+
+    /**
+     * Accepts a url parameter and calls the API with the given url.
+     *
+     * @param string $url
+     * @return object
+     */
+    protected function callAddressAPI($url)
+    {
+        if (empty(GetAddressIo::$plugin->getSettings()->getAPIKey())) {
+            // Throw an error.
+            throw new \Exception('getaddress.io API Key not set. Please add this to plugins configuration screen.');
+        }
+
+        $client = $this->get();
+
+        $response = false;
+        $errors = [];
+
+        try {
+            $response = $client->request(
+                'GET',
+                $url,
+                [
+                    'query' => [
+                        'api-key' => GetAddressIo::$plugin->getSettings()->getAPIKey(),
+                    ],
+                ],
+            );
+        } catch (\Exception $e) {
+            $errors[] = (object) [
+                'code'    => $e->getCode(),
+                'message' => ! empty(
+                    $this->errorMessages[$e->getCode()]
+                ) ? $this->errorMessages[$e->getCode()] : 'An unknown error has occured.',
+            ];
+        }
+
+        $responseContent = '';
+        if ($response) {
+            $responseContent = json_decode(
+                $response->getBody()
+                    ->getContents()
+            );
+        }
+
+        return (object) [
+            'response' => $responseContent,
+            'errors' => $errors,
+            'hasErrors' => (bool) count($errors),
+        ];
+    }
 }
