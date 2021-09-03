@@ -106,7 +106,7 @@ var getAddressIoAutocomplete = {
                     throw Error('Could not obtain address.');
                 }
 
-                jQuery(document).trigger('get-address-io-autocomplete', address.response);
+                document.dispatchEvent(new CustomEvent('get-address-io-autocomplete', { 'detail': address.response }));
             });
         });
     }

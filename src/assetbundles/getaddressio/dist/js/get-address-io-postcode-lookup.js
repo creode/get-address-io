@@ -51,11 +51,11 @@ var getAddressIoPostcodeLookup = {
                 // Set address select box ready to be sent through to the listening event.
                 var addressSelectBox = postcodeLookupWrapper.find('select[name="get-address-io-postcode-lookup-addresses"]');
 
-                // Trigger an event that can be listened to in your theme, passing list of addresses.
-                jQuery(document).trigger('get-address-io-postcode-lookup', {
+                // Trigger an event that can be listened to in your theme, passing list of addresses and element.
+                document.dispatchEvent(new CustomEvent('get-address-io-postcode-lookup', {'detail': {
                     addresses: addresses.response,
                     selectBox: addressSelectBox
-                });
+                }}));
             });
         })
     },
