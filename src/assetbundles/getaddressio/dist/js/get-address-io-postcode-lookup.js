@@ -44,16 +44,12 @@ var getAddressIoPostcodeLookup = {
 
             // Send postcode off to ajax.
             jQuery.post('/actions/get-address-io/ajax-lookup/get-by-postcode', postData, function(addresses, status) {
-
-                console.log(addresses);
                 if (!addresses.response || addresses.response.hasErrors) {
                     throw Error('Could not obtain addresses.');
                 }
 
                 // Set address select box ready to be sent through to the listening event.
                 var addressSelectBox = postcodeLookupWrapper.find('select[name="get-address-io-postcode-lookup-addresses"]');
-
-                console.log(addressSelectBox);
 
                 // Trigger an event that can be listened to in your theme, passing list of addresses.
                 jQuery(document).trigger('get-address-io-postcode-lookup', {
