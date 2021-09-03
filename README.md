@@ -39,7 +39,7 @@ You have two templates that can be used in your sites `templates` folder:
 
 Each of the templates above can be overwritten by using the same path within your template folder. This gives you fine grain control over how the fields should be structured. When doing so I'd suggest removing the existing asset bundle and going with your own JavaScript to ensure the functionality still works.
 
-### JavaScript Events
+### JavaScript Events
 
 In order to keep this plugin as customisable as possible we fire off our own document events within JavaScript so that they can be responsed to within your own code. These are as follows:
 
