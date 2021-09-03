@@ -20,7 +20,7 @@ use yii\web\JqueryAsset;
  * @package   GetAddressIo
  * @since     1.0.0
  */
-class GetAddressIoAsset extends AssetBundle
+class GetAddressIoAutocompleteAsset extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -33,17 +33,12 @@ class GetAddressIoAsset extends AssetBundle
         $this->sourcePath = "@creode/getaddressio/assetbundles/getaddressio/dist";
 
         $this->depends = [
-            AssetBundle::class,
             JqueryAsset::class,
             Select2Asset::class,
         ];
 
         $this->js = [
-            'js/get-address-io.js',
-        ];
-
-        $this->css = [
-            'css/get-address-io.css',
+            'js/get-address-io-autocomplete.js',
         ];
 
         parent::init();

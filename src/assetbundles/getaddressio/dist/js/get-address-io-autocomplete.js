@@ -9,7 +9,7 @@
  * @package   GetAddressIo
  * @since     1.0.0
  */
-var getAddressIo = {
+var getAddressIoAutocomplete = {
     elements: {
         lookupSelectField: false
     },
@@ -106,12 +106,12 @@ var getAddressIo = {
                     throw Error('Could not obtain address.');
                 }
 
-                jQuery(document).trigger('get-address-io-lookup', address.response);
+                jQuery(document).trigger('get-address-io-autocomplete', address.response);
             });
         });
     }
 }
 
 jQuery(document).ready(function() {
-    getAddressIo.init();
+    getAddressIoAutocomplete.init();
 });

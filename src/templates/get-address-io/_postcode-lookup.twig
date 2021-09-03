@@ -1,0 +1,20 @@
+{% do view.registerAssetBundle("creode\\getaddressio\\assetbundles\\getaddressio\\GetAddressIoPostcodeLookupAsset") %}
+
+{% set shouldShowLabel = showLabel|default(true) %}
+{# Default can cause an issue since false == empty. So instead we use ?? workaround. #}
+{% set shouldShowLabelAbove = showLabelAbove ?? true %}
+{% if shouldShowLabel and shouldShowLabelAbove %}
+    <label for="{{ fieldId|default('get-address-lookup-field') }}" class="{{ fieldLabelClasses|default('') }}">{{ fieldLabelText|default('Postcode') }}</label>
+{% endif %}
+
+<div class="postcode-lookup-field">
+    <input id="{{ fieldId|default('get-address-lookup-field') }}" name="{{ fieldName|default('get-address-io-postcode-lookup') }}" type="text" class="{{ fieldClasses|default('get-addres-io-postcode-lookup-field') }}" placeholder="{{ fieldPlaceholder|default('Enter your postcode') }}" value="{{ fieldValue|default('') }}" />
+    <a href="#" class="address-lookup-btn search-btn"></a>
+</div>
+
+{% if shouldShowLabel and shouldShowLabelAbove == false %}
+    <label for="{{ fieldId|default('get-address-lookup-field') }}" class="{{ fieldLabelClasses|default('') }}">{{ fieldLabelText|default('Postcode') }}</label>
+{% endif %}
+
+<select name=""></select>
+
