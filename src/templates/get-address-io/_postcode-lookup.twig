@@ -7,14 +7,19 @@
     <label for="{{ fieldId|default('get-address-lookup-field') }}" class="{{ fieldLabelClasses|default('') }}">{{ fieldLabelText|default('Postcode') }}</label>
 {% endif %}
 
-<div class="postcode-lookup-field">
-    <input id="{{ fieldId|default('get-address-lookup-field') }}" name="{{ fieldName|default('get-address-io-postcode-lookup') }}" type="text" class="{{ fieldClasses|default('get-addres-io-postcode-lookup-field') }}" placeholder="{{ fieldPlaceholder|default('Enter your postcode') }}" value="{{ fieldValue|default('') }}" />
-    <a href="#" class="address-lookup-btn search-btn"></a>
+<div class="get-address-io-postcode-lookup-wrapper">
+    <div class="postcode-lookup-field">
+        <input id="{{ fieldId|default('get-address-lookup-field') }}" name="{{ fieldName|default('get-address-io-postcode-lookup') }}" type="text" class="{{ fieldClasses|default('get-addres-io-postcode-lookup-field') }}" placeholder="{{ fieldPlaceholder|default('Enter your postcode') }}" value="{{ fieldValue|default('') }}" />
+        <a href="#" class="get-address-io-postcode-lookup-btn search-btn"></a>
+    </div>
+
+    {% if shouldShowLabel and shouldShowLabelAbove == false %}
+        <label for="{{ fieldId|default('get-address-lookup-field') }}" class="{{ fieldLabelClasses|default('') }}">{{ fieldLabelText|default('Postcode') }}</label>
+    {% endif %}
+
+    <select name="get-address-io-postcode-lookup-addresses">
+        <option>{{ 'Please select an addresses from the list...'|t }}</option>
+    </select>
 </div>
 
-{% if shouldShowLabel and shouldShowLabelAbove == false %}
-    <label for="{{ fieldId|default('get-address-lookup-field') }}" class="{{ fieldLabelClasses|default('') }}">{{ fieldLabelText|default('Postcode') }}</label>
-{% endif %}
-
-<select name=""></select>
-
+{% include '_get-address-io/_components/_set_js_csrf_token' %}
