@@ -40,6 +40,10 @@ class GetAddressIoPostcodeLookupAsset extends AssetBundle
             'js/get-address-io-postcode-lookup.js',
         ];
 
+        $this->css = [
+            'css/get-address-io-postcode-lookup.css',
+        ];
+
         parent::init();
     }
 }
