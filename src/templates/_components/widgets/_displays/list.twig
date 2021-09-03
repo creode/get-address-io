@@ -1,0 +1,6 @@
+{% set usageData = usage.response %}
+
+<p>{{ "Usage Today: "|t }} <strong>{{ usageData.usage_today }}</strong></p>
+<p>{{ "Daily Limit: "|t }} <strong>{{ usageData.daily_limit }}</strong></p>
+<p>{{ "Monthly Buffer: "|t }} <strong>{{ usageData.monthly_buffer }}</strong></p>
+<p>{{ "Monthly Buffer Used: "|t }} <strong>{{ usageData.monthly_buffer_used }}</strong></p>

@@ -25,3 +25,14 @@
   value: settings.apiKey,
   errors: settings.getErrors('apiKey')
 }) }}
+
+{{ forms.autosuggestField({
+  label: "getaddress.io Administration Key"|t('getaddressio'),
+  instructions: "Your Administration Key provided by getaddress.io."|t('getaddressio'),
+  id: 'administrationKey',
+  class: 'ltr',
+  name: 'administrationKey',
+  suggestEnvVars: true,
+  value: settings.administrationKey,
+  errors: settings.getErrors('administrationKey')
+}) }}

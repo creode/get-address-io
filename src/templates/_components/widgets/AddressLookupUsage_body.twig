@@ -12,9 +12,12 @@
  * @since     1.0.0
  */
 #}
-
-{% set iconUrl = view.getAssetManager().getPublishedUrl('@creode/getaddressio/assetbundles/addresslookupusagewidget/dist', true) ~ '/img/AddressLookupUsage-icon.svg' %}
-
-<img src="{{ iconUrl }}" height="64" width="64" />
-
-<p>{{ message }}</p>
+{% if usage.hasErrors %}
+    {% for error in usage.errors %}
+        <p class="error">{{ error.message }}</p>
+    {% endfor %}
+{% else %}
+    <div class="get-address-io-usage-widget">
+        {% include [ 'get-address-io/_components/widgets/_displays/' ~ billing_report, 'get-address-io/_components/widgets/_displays/list' ]%}
+    </div>
+{% endif %}

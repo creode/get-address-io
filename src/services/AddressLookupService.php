@@ -10,10 +10,11 @@
 
 namespace creode\getaddressio\services;
 
-use creode\getaddressio\GetAddressIo;
-
 use Craft;
+
 use craft\base\Component;
+use creode\getaddressio\GetAddressIo;
+use creode\getaddressio\contracts\ApiResponse;
 
 /**
  * @author    Creode <contact@creode.co.uk>
@@ -25,6 +26,13 @@ class AddressLookupService extends Component
     // Public Methods
     // =========================================================================
 
+    /**
+     * Searches the Get Address IO API for addresses within a given postcode.
+     *
+     * @param string $postcode
+     *
+     * @return ApiResponse
+     */
     public function getAddressesByPostcode(string $postcode)
     {
         return GetAddressIo::$plugin
@@ -37,7 +45,7 @@ class AddressLookupService extends Component
      *
      * @param string|null $searchTerm The search term we will provide to Get Address' API.
      *
-     * @return object
+     * @return ApiResponse
      */
     public function autocomplete(?string $searchTerm)
     {
@@ -54,12 +62,24 @@ class AddressLookupService extends Component
      * Finds an address by a given ID.
      *
      * @param string $id
-     * @return object
+     * @return ApiResponse
      */
     public function getAddressById(string $id)
     {
         return GetAddressIo::$plugin
             ->api
             ->getAddressById($id);
+    }
+
+    /**
+     * Gets a report based on the API Usage.
+     *
+     * @return ApiResponse
+     */
+    public function getApiUsage()
+    {
+        return GetAddressIo::$plugin
+            ->api
+            ->getAPIUsage();
     }
 }

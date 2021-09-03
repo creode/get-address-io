@@ -34,6 +34,8 @@ class AddressLookupUsage extends Widget
      */
     public $message = 'Hello, world.';
 
+    public $billing_report = 'list';
+
     // Static Methods
     // =========================================================================
 
@@ -42,7 +44,7 @@ class AddressLookupUsage extends Widget
      */
     public static function displayName(): string
     {
-        return Craft::t('get-address-io', 'AddressLookupUsage');
+        return Craft::t('get-address-io', 'getaddress.io API Usage');
     }
 
     /**
@@ -73,8 +75,8 @@ class AddressLookupUsage extends Widget
         $rules = array_merge(
             $rules,
             [
-                ['message', 'string'],
-                ['message', 'default', 'value' => 'Hello, world.'],
+                ['billing_report', 'string'],
+                ['billing_report', 'default', 'value' => 'list']
             ]
         );
         return $rules;
@@ -88,7 +90,7 @@ class AddressLookupUsage extends Widget
         return Craft::$app->getView()->renderTemplate(
             'get-address-io/_components/widgets/AddressLookupUsage_settings',
             [
-                'widget' => $this
+                'widget' => $this,
             ]
         );
     }
@@ -99,11 +101,13 @@ class AddressLookupUsage extends Widget
     public function getBodyHtml()
     {
         Craft::$app->getView()->registerAssetBundle(AddressLookupUsageWidgetAsset::class);
+        $apiUsage = GetAddressIo::$plugin->addressLookupService->getApiUsage();
 
         return Craft::$app->getView()->renderTemplate(
             'get-address-io/_components/widgets/AddressLookupUsage_body',
             [
-                'message' => $this->message
+                'billing_report' => $this->billing_report,
+                'usage' => $apiUsage,
             ]
         );
     }

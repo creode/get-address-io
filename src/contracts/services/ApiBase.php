@@ -12,6 +12,7 @@ namespace creode\getaddressio\contracts\services;
 
 use craft\base\Component;
 use creode\getaddressio\contracts\ApiResponse;
+use creode\getaddressio\GetAddressIo;
 
 abstract class ApiBase extends Component
 {
@@ -58,6 +59,16 @@ abstract class ApiBase extends Component
     public function getAddressesByPostcode(string $postcode): ApiResponse
     {
         return $this->get("find/$postcode", ['expand' => 'True']);
+    }
+
+    /**
+     * Get a basic usage report back from the API.
+     *
+     * @return ApiResponse
+     */
+    public function getAPIUsage(): ApiResponse
+    {
+        return $this->get("v3/usage", ['api-key' => GetAddressIo::$plugin->getSettings()->getAdministrationKey()]);
     }
 
     /**

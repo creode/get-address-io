@@ -17,10 +17,14 @@
 {# 
 {% do view.registerAssetBundle("creode\\getaddressio\\assetbundles\\getaddressio\\GetAddressIoAsset") %} #}
 
-{{ forms.textField({
-    label: 'Message',
-    instructions: 'Enter a message here.',
-    id: 'message',
-    name: 'message',
-    value: widget['message']})
+{{ 
+    forms.selectField({
+        label: 'getaddress.io Billing Type',
+        instructions: 'Select the display for the usage report',
+        name: 'billing_report',
+        value: widget['billing_report'],
+        options: {
+            'list': 'List',
+        }
+    })
 }}

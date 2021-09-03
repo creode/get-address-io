@@ -26,9 +26,18 @@ class Settings extends Model
     // =========================================================================
 
     /**
+     * Get Address IO API Key used to make API calls.
+     * 
      * @var string
      */
     public $apiKey = '';
+
+    /**
+     * Get Address IO Admin Key used for Admin based tasks.
+     *
+     * @var string
+     */
+    public $administrationKey = '';
 
     // Public Methods
     // =========================================================================
@@ -43,6 +52,11 @@ class Settings extends Model
         return Craft::parseEnv($this->apiKey);
     }
 
+    public function getAdministrationKey()
+    {
+        return Craft::parseEnv($this->administrationKey);
+    }
+
     /**
      * @inheritdoc
      */
@@ -50,6 +64,7 @@ class Settings extends Model
     {
         return [
             ['apiKey', 'string'],
+            ['administrationKey', 'string']
         ];
     }
 }
