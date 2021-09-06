@@ -27,7 +27,7 @@ class Settings extends Model
 
     /**
      * Get Address IO API Key used to make API calls.
-     * 
+     *
      * @var string
      */
     public $apiKey = '';
