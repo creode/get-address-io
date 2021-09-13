@@ -31,7 +31,7 @@ var getAddressIoPostcodeLookup = {
             e.preventDefault();
 
             var postcodeLookupWrapper = jQuery(this).closest('.get-address-io-postcode-lookup-wrapper');
-            var postcodeField = postcodeLookupWrapper.find('input[name="get-address-io-postcode-lookup"]');
+            var postcodeField = postcodeLookupWrapper.find('input');
 
             if (postcodeField.length <= 0) {
                 return;
@@ -49,7 +49,7 @@ var getAddressIoPostcodeLookup = {
                 }
 
                 // Set address select box ready to be sent through to the listening event.
-                var addressSelectBox = postcodeLookupWrapper.find('select[name="get-address-io-postcode-lookup-addresses"]');
+                var addressSelectBox = postcodeLookupWrapper.find('select');
 
                 // Trigger an event that can be listened to in your theme, passing list of addresses and element.
                 document.dispatchEvent(new CustomEvent('get-address-io-postcode-lookup', {'detail': {

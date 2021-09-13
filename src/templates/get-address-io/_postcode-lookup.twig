@@ -17,7 +17,7 @@
         <label for="{{ fieldId|default('get-address-lookup-field') }}" class="{{ fieldLabelClasses|default('') }}">{{ fieldLabelText|default('Postcode') }}</label>
     {% endif %}
 
-    <select class="get-address-io-address-select" name="get-address-io-postcode-lookup-addresses">
+    <select class="get-address-io-address-select" name="{{ addressFieldName|default('get-address-io-postcode-lookup') }}">
         <option>{{ 'Please select an addresses from the list...'|t }}</option>
     </select>
 </div>
