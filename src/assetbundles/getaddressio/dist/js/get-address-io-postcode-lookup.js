@@ -13,7 +13,7 @@ var getAddressIoPostcodeLookup = {
     },
 
     getElements: function() {
-        this.elements.lookupField = jQuery('input[name="get-address-io-postcode-lookup"]');
+        this.elements.lookupField = jQuery('.postcode-lookup-field input');
         if (!this.elements.lookupField.length) {
             return false;
         }
