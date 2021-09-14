@@ -13,6 +13,8 @@
         <a href="#" class="get-address-io-postcode-lookup-btn search-btn"></a>
     </div>
 
+    {% block belowPostcode %}{% endblock %}
+
     {% if shouldShowLabel and shouldShowLabelAbove == false %}
         <label for="{{ fieldId|default('get-address-lookup-field') }}" class="{{ fieldLabelClasses|default('') }}">{{ fieldLabelText|default('Postcode') }}</label>
     {% endif %}
