@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## 1.1.0 - 2021-09-14
+### Features
+
+* Add block to postcode lookup to allow markup to be injected. (7c1b80)
+
+### Bug Fixes
+
+* Define empty value for option. (6ee135)
+
 ## 1.0.2 - 2021-09-13
 ### Bug Fixes
 
