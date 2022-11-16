@@ -1,4 +1,4 @@
-# Get Address IO plugin for Craft CMS 3.x
+# Get Address IO plugin for Craft CMS
 
 Integrates Craft CMS with the getaddress IO service for autocompletion of address' in the UK.
 
@@ -7,6 +7,12 @@ Integrates Craft CMS with the getaddress IO service for autocompletion of addres
 ## Requirements
 
 This plugin requires Craft CMS 3.5 or later. This is due to the usage of Crafts Template Roots functionality.
+
+## Versions
+| Craft Version | Plugin Version |
+|---------------|----------------|
+| Craft CMS V3  | 1.x            |
+| Craft CMS V4  | 2.x            |
 
 ## Installation
 
