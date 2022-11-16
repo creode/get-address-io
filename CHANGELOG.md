@@ -4,6 +4,17 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## 2.0.0 - 2022-11-16
+
+### ⚠ BREAKING CHANGES
+
+* Supports Craft 4 (6d1e64)
+
+### Bug Fixes
+
+* Add type declarations for Craft 4 support. (e0f393)
+* Include composer allow plugin list. (cc6672)
+
 ## 1.1.0 - 2021-09-14
 ### Features
 
