@@ -32,7 +32,7 @@ class AjaxLookupController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['autocomplete', 'get-by-id', 'get-by-postcode'];
+    protected array|int|bool $allowAnonymous = ['autocomplete', 'get-by-id', 'get-by-postcode'];
 
     // Public Methods
     // =========================================================================

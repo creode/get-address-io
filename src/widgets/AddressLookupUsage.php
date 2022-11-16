@@ -58,7 +58,7 @@ class AddressLookupUsage extends Widget
     /**
      * @inheritdoc
      */
-    public static function maxColspan()
+    public static function maxColspan(): ?int
     {
         return null;
     }
@@ -69,7 +69,7 @@ class AddressLookupUsage extends Widget
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge(
@@ -85,7 +85,7 @@ class AddressLookupUsage extends Widget
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate(
             'get-address-io/_components/widgets/AddressLookupUsage_settings',
@@ -98,7 +98,7 @@ class AddressLookupUsage extends Widget
     /**
      * @inheritdoc
      */
-    public function getBodyHtml()
+    public function getBodyHtml(): ?string
     {
         Craft::$app->getView()->registerAssetBundle(AddressLookupUsageWidgetAsset::class);
         $apiUsage = GetAddressIo::$plugin->addressLookupService->getApiUsage();
