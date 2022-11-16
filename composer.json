@@ -28,12 +28,11 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0",
+        "craftcms/cms": "^4.0.0",
         "hiqdev/yii2-asset-select2": "^4.0",
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
-        "craftcms/cms": "^3.5.0",
         "codeception/codeception": "^4.0",
         "vlucas/phpdotenv": "^3.0",
         "codeception/module-yii2": "^1.1",
