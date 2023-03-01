@@ -1,8 +1,12 @@
-{% js %}
+{% if nonce is not defined %}
+    {% set nonce="" %}
+{% endif %}
+
+<script nonce="{{ nonce }}">
     if (typeof csrfToken == 'undefined') {
         var csrfToken = {
-            csrfTokenName: "{{ craft.app.config.general.csrfTokenName|raw }}",
-            csrfTokenValue: "{{ craft.app.request.csrfToken|raw }}"
+            csrfTokenName: "{{ craft.app.config.general.csrfTokenName|e('js') }}",
+            csrfTokenValue: "{{ craft.app.request.csrfToken|e('js') }}"
         };
     }
-{% endjs %}
+</script>
