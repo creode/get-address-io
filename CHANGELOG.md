@@ -4,6 +4,19 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## 2.1.0 - 2023-03-01
+
+### Features
+
+* Allow craft {{ nonce }} variable from Sherlock to be injected into the CSRF token script. (155f76)
+
+### Bug Fixes
+
+
+##### Ci
+
+* Address some issues with testing since Craft 4 now only supports PHP 8.0.2+ (7d074d)
+
 ## 2.0.0 - 2022-11-16
 
 ### ⚠ BREAKING CHANGES
